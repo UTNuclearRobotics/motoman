@@ -181,4 +181,84 @@
     <parent link="link_l"/>
     <child link="base"/>
   </joint>
+  <!-- specify in degrees 40 -->
+  <link name="tool0_oriented"/>
+  <joint name="tool0_oriented_joint" type="fixed">
+    <parent link="tool0"/>
+    <child link="tool0_oriented"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.011"/>
+  </joint>
+  <!-- attach ft sensor -->
+  <link name="ft_sensor">
+    <visual>
+      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
+      <geometry>
+        <mesh filename="package://motoman_sia5d_support/meshes/ft_sensor.stl"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://motoman_sia5d_support/meshes/ft_sensor.stl"/>
+      </geometry>
+      <material name="yellow"/>
+    </collision>
+  </link>
+  <joint name="ft_sensor_joint" type="fixed">
+    <parent link="tool0_oriented"/>
+    <child link="ft_sensor"/>
+    <origin rpy="0.0 0.0 4.15388362029" xyz="0.0 0.0 0.03"/>
+  </joint>
+  <!-- attach plasma pen holder -->
+  <link name="plasma_pen_holder">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://motoman_sia5d_support/meshes/plasma_pen_mount.stl"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://motoman_sia5d_support/meshes/plasma_pen_mount.stl"/>
+      </geometry>
+      <material name="yellow"/>
+    </collision>
+  </link>
+  <joint name="ft_to_plasma_joint" type="fixed">
+    <parent link="ft_sensor"/>
+    <child link="plasma_pen_holder"/>
+    <origin rpy="3.141592654 0.0 4.18879020533" xyz="0.0 0.0 0.05"/>
+  </joint>
+  <!-- attach plasma pen -->
+  <link name="plasma_pen">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://motoman_sia5d_support/meshes/pen.stl"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://motoman_sia5d_support/meshes/pen.stl"/>
+      </geometry>
+      <material name="yellow"/>
+    </collision>
+  </link>
+  <joint name="holder_to_pen" type="fixed">
+    <parent link="plasma_pen_holder"/>
+    <child link="plasma_pen"/>
+    <origin rpy="3.141592654 0.0 0.0" xyz="-0.063 0.0 0.135"/>
+  </joint>
+  <!-- attach eef link at front of pen -->
+  <link name="eef"/>
+  <joint name="eef_joint" type="fixed">
+    <parent link="plasma_pen"/>
+    <child link="eef"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.23"/>
+  </joint>
 </robot>
