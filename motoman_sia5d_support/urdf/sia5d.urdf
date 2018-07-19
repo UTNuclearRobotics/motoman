@@ -5,7 +5,7 @@
 <!-- =================================================================================== -->
 <!--Generates a urdf from the macro in sia5_macro.xacro -->
 <robot name="motoman_sia5d" xmlns:xacro="http://ros.org/wiki/xacro">
-  <!--degrees to radians-->
+  <!--degrees to radians - fudge factor -->
   <link name="base_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -22,67 +22,66 @@
   </link>
   <link name="link_s">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 3.141576 3.141576" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://motoman_sia5d_support/meshes/sia5d/visual/link_s.dae"/>
       </geometry>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 3.141576 3.141576" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://motoman_sia5d_support/meshes/sia5d/collision/link_s.dae"/>
       </geometry>
     </collision>
   </link>
   <joint name="joint_s" type="revolute">
-    <origin rpy="0 0 0" xyz="0 0 0.31"/>
-    <!--r=${90*deg}-->
+    <origin rpy="3.141576 0 3.141576" xyz="0 0 0.31"/>
     <parent link="base_link"/>
     <child link="link_s"/>
-    <axis xyz="0 0 1"/>
-    <limit effort="0" lower="-3.14159274" upper="3.14159274" velocity="3.4906586"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="0" lower="-3.141576" upper="3.141576" velocity="3.49064"/>
   </joint>
   <link name="link_l">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 -3.141576" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://motoman_sia5d_support/meshes/sia5d/visual/link_l.dae"/>
       </geometry>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 -3.141576" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://motoman_sia5d_support/meshes/sia5d/collision/link_l.dae"/>
       </geometry>
     </collision>
   </link>
   <joint name="joint_l" type="revolute">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <origin rpy="0 -3.141576 0" xyz="0 0 0"/>
     <parent link="link_s"/>
     <child link="link_l"/>
-    <axis xyz="0 1 0"/>
-    <limit effort="0" lower="-1.91986223" upper="1.91986223" velocity="3.4906586"/>
+    <axis xyz="0 -1 0"/>
+    <limit effort="0" lower="-1.919852" upper="1.919852" velocity="3.49064"/>
   </joint>
   <link name="link_e">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 3.141576" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://motoman_sia5d_support/meshes/sia5d/visual/link_e.dae"/>
       </geometry>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 3.141576" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://motoman_sia5d_support/meshes/sia5d/collision/link_e.dae"/>
       </geometry>
     </collision>
   </link>
   <joint name="joint_e" type="revolute">
-    <origin rpy="0 0 0" xyz="0 0 0.27"/>
+    <origin rpy="0 0 3.141576" xyz="0 0 0.27"/>
     <parent link="link_l"/>
     <child link="link_e"/>
     <axis xyz="0 0 1"/>
-    <limit effort="0" lower="-2.96705981" upper="2.96705981" velocity="3.4906586"/>
+    <limit effort="0" lower="-2.967044" upper="2.967044" velocity="3.49064"/>
   </joint>
   <link name="link_u">
     <visual>
@@ -99,42 +98,42 @@
     </collision>
   </link>
   <joint name="joint_u" type="revolute">
-    <origin rpy="0 0 0" xyz="0.085 0 0"/>
+    <origin rpy="0 0 3.141576" xyz="-0.085 0 0"/>
     <parent link="link_e"/>
     <child link="link_u"/>
     <axis xyz="0 -1 0"/>
-    <limit effort="0" lower="-1.57079637" upper="2.007128695" velocity="3.4906586"/>
+    <limit effort="0" lower="-1.570788" upper="2.007118" velocity="3.49064"/>
   </joint>
   <link name="link_r">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 3.141576" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://motoman_sia5d_support/meshes/sia5d/visual/link_r.dae"/>
       </geometry>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 3.141576" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://motoman_sia5d_support/meshes/sia5d/collision/link_r.dae"/>
       </geometry>
     </collision>
   </link>
   <joint name="joint_r" type="revolute">
-    <origin rpy="0 0 0" xyz="0.27 0 0.06"/>
+    <origin rpy="0 0 3.141576" xyz="0.27 0 0.060"/>
     <parent link="link_u"/>
     <child link="link_r"/>
     <axis xyz="-1 0 0"/>
-    <limit effort="0" lower="-1.57079637" upper="1.57079637" velocity="3.4906586"/>
+    <limit effort="0" lower="-3.141576" upper="3.141576" velocity="3.49064"/>
   </joint>
   <link name="link_b">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 3.141576" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://motoman_sia5d_support/meshes/sia5d/visual/link_b.dae"/>
       </geometry>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 0 3.141576" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://motoman_sia5d_support/meshes/sia5d/collision/link_b.dae"/>
       </geometry>
@@ -144,49 +143,42 @@
     <origin rpy="0 0 0" xyz="0 0 0"/>
     <parent link="link_r"/>
     <child link="link_b"/>
-    <axis xyz="0 -1 0"/>
-    <limit effort="0" lower="-1.91986223" upper="1.91986223" velocity="4.01425739"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="0" lower="-1.919852" upper="1.919852" velocity="4.014236"/>
   </joint>
   <link name="link_t">
     <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 -1.570788 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://motoman_sia5d_support/meshes/sia5d/visual/link_t.dae"/>
       </geometry>
     </visual>
     <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <origin rpy="0 -1.570788 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://motoman_sia5d_support/meshes/sia5d/collision/link_t.dae"/>
       </geometry>
     </collision>
   </link>
   <joint name="joint_t" type="revolute">
-    <origin rpy="0 0 0" xyz="0.134 0 0"/>
+    <origin rpy="0 -1.570788 0" xyz="-0.134 0 0"/>
     <parent link="link_b"/>
     <child link="link_t"/>
-    <axis xyz="-1 0 0"/>
-    <limit effort="0" lower="-1.57079637" upper="1.57079637" velocity="6.10865255"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="0" lower="-3.141576" upper="3.141576" velocity="6.10862"/>
   </joint>
   <link name="tool0"/>
   <joint name="link_t-tool0" type="fixed">
-    <origin rpy="-1.57079637 -1.57079637 -1.57079637" xyz="0.011 0 0"/>
+    <origin rpy="-1.570788 -1.570788 -1.570788" xyz="0.011 0 0"/>
     <parent link="link_t"/>
     <child link="tool0"/>
-  </joint>
-  <!-- ROS base_link (via link_l) to Motoman Robot (not Base) Frame transform -->
-  <link name="base"/>
-  <joint name="link_l-base" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <parent link="link_l"/>
-    <child link="base"/>
   </joint>
   <!-- specify in degrees 40 -->
   <link name="tool0_oriented"/>
   <joint name="tool0_oriented_joint" type="fixed">
     <parent link="tool0"/>
     <child link="tool0_oriented"/>
-    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.011"/>
+    <origin rpy="0.0 1.570796327 0.0" xyz="0.0 0.0 -0.011"/>
   </joint>
   <!-- attach ft sensor -->
   <link name="ft_sensor">
